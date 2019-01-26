@@ -18,3 +18,6 @@ sudo pip install psutil
 #Install request to allow data to be sent
 sudo apt-get update
 sudo apt-get install python-requests
+
+#Get the Unit File that will be used to run collector.py as a service
+
