@@ -6,6 +6,12 @@ set -e
 exec &> >(tee collector_install.log)
 exec 2>&1
 
+#Download the collector.py file
+wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
+
+#Add execute priveliges to the collector.py file
+chmod +x collector.py
+
 #Install the dependencies
 sudo apt-get update
 
@@ -20,4 +26,14 @@ sudo apt-get update
 sudo apt-get install python-requests
 
 #Get the Unit File that will be used to run collector.py as a service
+wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.service
+sudo mv ~/collector.service /lib/systemd/system/collector.service
 
+#Set permissions on the Unit File
+sudo chmod 644 /lib/systemd/system/collector.service
+
+#Setup Service
+sudo systemctl daemon-reload
+sudo systemctl enable collector.service
+
+echo Installed, just reboot
