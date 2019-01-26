@@ -45,7 +45,7 @@ def get_human_readable_size(num):
 #=================================================
 #------ Main Code
 #=================================================
-debugOn=False
+debugOn=True
 if debugOn:
     print(get_uptime())
     print(getMAC(networkAdaptor))
