@@ -14,6 +14,9 @@ def get_uptime():
     uptime = float(os.popen("awk '{print $1}' /proc/uptime").readline())
     return str(time.strftime("%d-day(s) %H:%M:%S", time.gmtime(uptime)))
 
+def get_seconds_elapsed():
+    return time.time() - psutil.boot_time()
+
 def get_temp():
     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
     return(findall("\d+\.\d+",temp)[0])
@@ -48,6 +51,7 @@ def get_human_readable_size(num):
 debugOn=True
 if debugOn:
     print(get_uptime())
+    print(get_seconds_elapsed())
     print(getMAC(networkAdaptor))
     print(get_ip_address(networkAdaptor))
     print(socket.gethostname())
@@ -65,6 +69,9 @@ while True:
         S_data = "storage,host=" + socket.gethostname() + \
                 " memory_usage_percent=" + str(psutil.virtual_memory().percent) + \
                 ",storage_usage_percent=" + str(psutil.disk_usage('/').percent)
+        
+        E_data = "uptime,host=" + socket.gethostname() + \
+                " seconds=" + str(get_seconds_elapsed())
 
         s = requests.Session()
         s.headers.update({'Content-type':'application/json'})
@@ -87,5 +94,14 @@ while True:
         except:
                 if debugOn:
                         print("unable to send S_data")
+        try:
+                r = s.post(url_string,E_data)
+                if debugOn:
+                        print("Trying to Send E_data")
+                        print(r.status_code)
+                        print(r.text)
+        except:
+                if debugOn:
+                        print("unable to send E_data")
 
         time.sleep(5)
