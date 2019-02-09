@@ -11,7 +11,7 @@ exec 2>&1
 #rm collector.py
 
 #Download the collector.py file
-wget -O https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
+wget -O - https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
 
 #Add execute priveliges to the collector.py file
 chmod +x collector.py
@@ -30,7 +30,7 @@ sudo apt-get update
 sudo apt-get install python-requests -y
 
 #Get the Unit File that will be used to run collector.py as a service
-wget -O https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.service
+wget -O - https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.service
 sudo mv -f collector.service /lib/systemd/system/collector.service
 
 #Set permissions on the Unit File
