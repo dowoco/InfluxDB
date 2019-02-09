@@ -7,7 +7,8 @@ exec &> >(tee collector_install.log)
 exec 2>&1
 
 #First remove an existing script with the same name
-rm collector.py
+#need to check if file exists before trying to delete it
+#rm collector.py
 
 #Download the collector.py file
 wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
