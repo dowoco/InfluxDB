@@ -11,7 +11,7 @@ exec 2>&1
 #rm collector.py
 
 #Download the collector.py file
-wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
+wget -O https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
 
 #Add execute priveliges to the collector.py file
 chmod +x collector.py
