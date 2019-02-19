@@ -6,12 +6,8 @@ set -e
 exec &> >(tee collector_install.log)
 exec 2>&1
 
-#First remove an existing script with the same name
-#need to check if file exists before trying to delete it
-#rm collector.py
-
-#Download the collector.py file
-wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py
+#Download the collector.py file overwriting any existing ones
+wget -q https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.py -O collector.py
 
 #Add execute priveliges to the collector.py file
 chmod +x collector.py
@@ -30,7 +26,7 @@ sudo apt-get update
 sudo apt-get install python-requests -y
 
 #Get the Unit File that will be used to run collector.py as a service
-wget https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.service
+wget -q https://raw.githubusercontent.com/dowoco/InfluxDB/master/collector.service -O collector.service
 sudo mv -f collector.service /lib/systemd/system/collector.service
 
 #Set permissions on the Unit File
