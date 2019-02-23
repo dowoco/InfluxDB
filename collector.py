@@ -5,7 +5,7 @@ from re import findall
 #=================================================
 #------- Declaration: Local Variables
 #=================================================
-url_string = 'http://192.168.0.16:8086/write?db=servers'
+url_string = 'http://192.168.0.104:8086/write?db=servers'
 networkAdaptor= "eth0"
 #=================================================
 #------- Functions
